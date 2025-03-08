@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: stg_tfl_stations
+    description: Staged TfL station data
+    columns:
+      - name: station_id
+        description: Unique identifier for the station
+        tests:
+          - unique
+          - not_null
+      - name: station_name
+        description: Name of the station
+        tests:
+          - not_null
+      - name: fare_zones
+        description: Array of fare zones the station belongs to
+      - name: has_wifi
+        description: Whether the station has WiFi
+        tests:
+          - not_null
+
+  - name: stg_tfl_platforms
+    description: Staged TfL platform data
+    columns:
+      - name: platform_id
+        description: Unique identifier for the platform
+        tests:
+          - unique
+          - not_null
+      - name: station_id
+        description: Foreign key to stations table
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_tfl_stations')
+              field: station_id
+      - name: platform_number
+        description: Platform number
+        tests:
+          - not_null
+      - name: cardinal_direction
+        description: Direction the platform serves
+        tests:
+          - not_null
+
+  - name: stg_tfl_modes_and_lines
+    description: Staged TfL transport modes and lines data
+    columns:
+      - name: mode_type
+        description: Type of transport mode
+        tests:
+          - not_null
+      - name: line_name
+        description: Name of the line
+        tests:
+          - not_null 
