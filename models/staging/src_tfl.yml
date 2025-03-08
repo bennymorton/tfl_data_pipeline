@@ -1,0 +1,43 @@
+version: 2
+
+sources:
+  - name: tfl_raw
+    database: "{{ target.database }}"
+    schema: staging_data  # adjust this to match your schema name
+    tables:
+      - name: stations
+        description: Raw TfL station data
+        columns:
+          - name: UniqueId
+            description: Unique identifier for the station
+            tests:
+              - unique
+              - not_null
+
+      - name: platforms
+        description: Raw TfL platform data
+        columns:
+          - name: UniqueId
+            description: Unique identifier for the platform
+            tests:
+              - unique
+              - not_null
+          - name: StationUniqueId
+            description: Foreign key to stations table
+            tests:
+              - not_null
+              - relationships:
+                  to: source('tfl_raw', 'stations')
+                  field: UniqueId
+
+      - name: modes_and_lines
+        description: Raw TfL transport modes and lines data
+        columns:
+          - name: Mode
+            description: Type of transport mode
+            tests:
+              - not_null
+          - name: Name
+            description: Name of the line
+            tests:
+              - not_null 
