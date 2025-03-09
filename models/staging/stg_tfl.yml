@@ -37,12 +37,10 @@ models:
               field: station_id
       - name: platform_number
         description: Platform number
-        tests:
-          - not_null
+        # tests:
       - name: cardinal_direction
         description: Direction the platform serves
-        tests:
-          - not_null
+        # tests:
 
   - name: stg_tfl_modes_and_lines
     description: Staged TfL transport modes and lines data

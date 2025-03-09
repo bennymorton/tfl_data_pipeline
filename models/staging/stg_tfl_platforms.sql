@@ -1,5 +1,5 @@
 WITH source AS (
-    SELECT * FROM {{ source('tfl_raw', 'platforms') }}
+    SELECT * FROM {{ source('tfl_raw', 'Platforms') }}
 ),
 
 staged AS (

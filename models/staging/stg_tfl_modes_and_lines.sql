@@ -1,11 +1,11 @@
 WITH source AS (
-    SELECT * FROM {{ source('tfl_raw', 'modes_and_lines') }}
+    SELECT * FROM {{ source('tfl_raw', 'ModesAndLines') }}
 ),
 
 staged AS (
     SELECT
-        Mode as mode_type,
-        Name as line_name
+        string_field_0 as mode_type,
+        string_field_1 as line_name
     FROM source
 )
 
