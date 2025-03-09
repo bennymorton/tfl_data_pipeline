@@ -3,9 +3,9 @@ version: 2
 sources:
   - name: tfl_raw
     database: "{{ target.database }}"
-    schema: staging_data  # adjust this to match your schema name
+    schema: tfl_data_pipeline_dataset_staging 
     tables:
-      - name: stations
+      - name: Stations
         description: Raw TfL station data
         columns:
           - name: UniqueId
@@ -14,7 +14,7 @@ sources:
               - unique
               - not_null
 
-      - name: platforms
+      - name: Platforms
         description: Raw TfL platform data
         columns:
           - name: UniqueId
@@ -30,14 +30,14 @@ sources:
                   to: source('tfl_raw', 'stations')
                   field: UniqueId
 
-      - name: modes_and_lines
+      - name: ModesAndLines
         description: Raw TfL transport modes and lines data
         columns:
-          - name: Mode
+          - name: string_field_0
             description: Type of transport mode
             tests:
               - not_null
-          - name: Name
+          - name: string_field_1
             description: Name of the line
             tests:
-              - not_null 
+              - not_null
